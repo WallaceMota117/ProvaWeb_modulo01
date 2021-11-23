@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Prova</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="conversorMd5.js"></script>
+  </head>
+
+  <body>
+    <div id="background">
+      <div id="converter">
+        <input id="mensagem" type="password" placeholder="Sua Mensagem" />
+
+        <button class="buttom" id="ativaMd5">Md5</button>
+
+        <button class="buttom" id="ativaBase64">Base64</button>
+        <p>Cript MD5: <span id="resultado"></span></p>
+        <br />
+        <p>Cript Base64: <span id="resultado1"></span></p>
+        <br />
+        <p>Descipt Base64: <span id="resultado2"></span></p>
+        <br />
+        <p>Case1 Base64: <span id="resultado3"></span></p>
+        <br />
+        <p>Case2 Base64: <span id="resultado4"></span></p>
+        <br />
+        <p>Case3 Base64: <span id="resultado5"></span></p>
+        <br />
+        <p>Case4 Base64: <span id="resultado6"></span></p>
+        <br />
+      </div>
+    </div>
+  </body>
+  <script>
+    $('#ativaMd5').click(function () {
+      var mensagemMD5 = $('#mensagem').val()
+
+      var mensagem_CriptMD5 = md5(mensagemMD5) //Cripto MD5
+      $('#resultado').html(mensagem_CriptMD5) //Visualiza
+    })
+
+    $('#ativaBase64').click(function () {
+      console.log('ativaBase64')
+      var mensagemBase64 = $('#mensagem').val()
+
+      var mensagem_CriptBase64 = btoa(mensagemBase64) //Cripto Base64
+      $('#resultado1').html(mensagem_CriptBase64) //Visualiza
+
+      var mensagem_DescriptBase64 = atob(mensagem_CriptBase64) //Descripto Base64
+      $('#resultado2').html(mensagem_DescriptBase64) //Visualiza
+
+      var mensagem_DescriptBase64_UpperCase =
+        mensagem_DescriptBase64.toUpperCase() //Base64 UpperCase
+      $('#resultado3').html(mensagem_DescriptBase64_UpperCase) //Visualiza
+
+      var mensagem_DescriptBase64_LowerCase =
+        mensagem_DescriptBase64.toLowerCase() //Base64 LowerCase
+      $('#resultado4').html(mensagem_DescriptBase64_LowerCase) //Visualiza
+
+      var mensagem_DescriptBase64_ProperCase = ProperCase(
+        mensagem_DescriptBase64
+      ) //Base64 ProperCase
+      $('#resultado5').html(mensagem_DescriptBase64_ProperCase) //Visualiza
+
+      var mensagem_DescriptBase64_CapitalCase = CapitalCase(
+        mensagem_DescriptBase64
+      ) //Base64 CapitalCase
+      $('#resultado6').html(mensagem_DescriptBase64_CapitalCase) //Visualiza
+    })
+    function CapitalCase(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
+    }
+
+    function ProperCase(str) {
+      return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+      })
+    }
+  </script>
+</html>
